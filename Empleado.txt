@@ -1,0 +1,1 @@
+Empleado(Persona(id=1,nombres=Sara,apellidos=Bonilla,Direccion(calle=11,carrera=12,coordenada=13,descripcion=123,Municipio(id=1,nombre=Villavicencio,Departamento(id=1,nombre=Meta,Pais(id=1,nombre=Colombia))))),salario=100.0, cargo=Cargo{id=1, nombre=Desarrodora})

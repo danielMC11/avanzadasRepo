@@ -1,0 +1,1 @@
+Estudiante{Persona(id=1,nombres=Camilo,apellidos=Rojas,Direccion(calle=11,carrera=12,coordenada=213,descripcion=123,Municipio(id=1,nombre=Villavicencio,Departamento(id=1,nombre=Meta,Pais(id=1,nombre=Colombia)))))codigo=123, programa=redespromedio=3.4}

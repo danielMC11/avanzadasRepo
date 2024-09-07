@@ -1,0 +1,96 @@
+package com.mycompany.mavenproject3.administradorRegistros;
+
+
+import com.mycompany.mavenproject3.base.Departamento;
+import com.mycompany.mavenproject3.base.Municipio;
+import com.mycompany.mavenproject3.base.Pais;
+import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.dao.baseDeDatos.municipio.MunicipioDAOImpl;
+
+import java.util.List;
+
+
+import static com.mycompany.mavenproject3.Util.leerValorPorConsola;
+import static com.mycompany.mavenproject3.Util.mostrarMenu;
+
+public class AdministradorRegistroMunicipio {
+	private final MunicipioDAOImpl municipioDAO;
+
+	public AdministradorRegistroMunicipio(H2Server db) {
+		this.municipioDAO = new MunicipioDAOImpl(db);
+	}
+
+	public void menu(){
+		while(true) {
+			int opcion = mostrarMenu("MENU MUNICIPIO",
+				List.of("Crear Municipio", "Editar Municipio", "Obtener Municipio",
+					"Listar Municipios", "Eliminar Municipio","Guardar Municipio en archivo plano","Ver los Municipios registrados en el archivo plano","Salir"
+				)
+			);
+
+			switch (opcion) {
+				case 1: crearMunicipio();break;
+				case 2: editarMunicipio(); break;
+				case 3: obtenerMunicipio(); break;
+				case 4: listarMunicipios();break;
+				case 5: eliminarMunicipio(); break;
+				case 6: guardarMuncipioArchivo(); break;
+				case 7: AdministradorDeArchivos.leerArchivoPlano("Municipio.txt");
+				case 8: return;
+				default: break;
+			}
+
+		}
+	}
+
+	public void guardarMuncipioArchivo(){
+		String nombreArchivo = "Municipio.txt";
+
+		Integer idMunicipio = (Integer) leerValorPorConsola("Id municipio: ",Integer.class);
+		String nombreMunicipio = (String) leerValorPorConsola("Nombre municipio: ",String.class);
+		Integer idDepartamento = (Integer) leerValorPorConsola("Id Departamento: ", Integer.class);
+		String nombreDepartamento = (String) leerValorPorConsola("Nombre departamento: ", String.class);
+		Integer paisId = (Integer) leerValorPorConsola("Id pais: ", Integer.class);
+		String nombrePais = (String) leerValorPorConsola("Nombre pais: ", String.class);
+		Pais pais = new Pais(paisId,nombrePais);
+		Departamento departamento = new Departamento(idDepartamento,nombreDepartamento,pais);
+		Municipio municipio = new Municipio(idMunicipio,nombreMunicipio,departamento);
+		AdministradorDeArchivos.escribirEnArchivo(municipio,nombreArchivo);
+
+		System.out.println("\n------El archivo se guardo en "+nombreArchivo+".txt exitosamente\n");
+	}
+	public void crearMunicipio(){
+		String nombreMunicipio = (String) leerValorPorConsola("Nombre municipio: ", String.class);
+		Integer departamentoId = (Integer) leerValorPorConsola("Id departamento: ", Integer.class);
+		Municipio municipio = new Municipio(nombreMunicipio, municipioDAO.departamentoDAO.buscarPorId(departamentoId));
+		municipioDAO.guardar(municipio);
+		System.out.print("\n.......Municipio creado exitosamente\n");
+	}
+
+
+	public void editarMunicipio(){
+		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
+		String nuevoNombre = (String) leerValorPorConsola("Nuevo nombre: ", String.class);
+
+		municipioDAO.actualizar(id, "nombre", nuevoNombre);
+		System.out.print("\n.......Municipio actualizado exitosamente\n");
+	}
+
+	public void obtenerMunicipio(){
+		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
+		Municipio municipio = municipioDAO.buscarPorId(id);
+		System.out.println(municipio);
+	}
+
+	public void listarMunicipios(){
+		for(Municipio municipio : municipioDAO.buscarTodos()){
+			System.out.println(municipio);
+		}
+	}
+
+	public void eliminarMunicipio(){
+		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
+		municipioDAO.eliminarPorId(id);
+		System.out.print("\n.......Municipio eliminado exitosamente\n");
+	}
+}
