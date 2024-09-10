@@ -20,13 +20,13 @@ public class ControladorPais {
 	}
 
 	public void crearPais(Pais pais){
-		for(PersistenciaPais p : metodosPersistencia)
-			p.guardar(pais);
+		for(PersistenciaPais persistenciaPais : metodosPersistencia)
+			persistenciaPais.guardar(pais);
 	}
 
 	public void editarPais(Integer id, String campo, Object valor){
-		for(PersistenciaPais p : metodosPersistencia)
-			p.actualizar( id, campo, valor);
+		for(PersistenciaPais persistenciaPais : metodosPersistencia)
+			persistenciaPais.actualizar( id, campo, valor);
 	}
 
 	public Pais obtenerPais(Integer id){
@@ -38,8 +38,8 @@ public class ControladorPais {
 	}
 
 	public void eliminarPais(Integer id){
-		for(PersistenciaPais p : metodosPersistencia)
-			p.eliminarPorId(id);
+		for(PersistenciaPais persistenciaPais : metodosPersistencia)
+			persistenciaPais.eliminarPorId(id);
 	}
 
 

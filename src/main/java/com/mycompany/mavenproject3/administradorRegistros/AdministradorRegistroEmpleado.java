@@ -1,10 +1,10 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
-import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorDeArchivos;
 import com.mycompany.mavenproject3.base.*;
 import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.persistencia.empleado.EmpleadoDAOImpl;
-import com.mycompany.mavenproject3.persistencia.persona.PersonaDAOImpl;
+import com.mycompany.mavenproject3.controlador.*;
+import com.mycompany.mavenproject3.persistencia.empleado.PersistenciaEmpleadoBD;
+import com.mycompany.mavenproject3.persistencia.persona.PersistenciaPersonaBD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,20 @@ import static com.mycompany.mavenproject3.util.ConsolaUtil.*;
 import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 public class AdministradorRegistroEmpleado {
-	private final EmpleadoDAOImpl empleadoDAO;
-	private final PersonaDAOImpl personaDAO;
 
-	private final AdministradorRegistroCargo crudCargo;
+	private final ControladorEmpleado controladorEmpleado;
+	private final ControladorMunicipio controladorMunicipio;
+	private final ControladorPersona controladorPersona;
+	private final ControladorCargo controladorCargo;
+
+	private final AdministradorRegistroCargo administradorRegistroCargo;
 
 	public AdministradorRegistroEmpleado(H2Server db) {
-		this.empleadoDAO = new EmpleadoDAOImpl(db);
-		this.personaDAO = new PersonaDAOImpl(db);
-		this.crudCargo  = new AdministradorRegistroCargo(db);
+		this.controladorEmpleado = new ControladorEmpleado(db);
+		this.controladorMunicipio = new ControladorMunicipio(db);
+		this.controladorPersona = new ControladorPersona(db);
+		this.controladorCargo = new ControladorCargo(db);
+		this.administradorRegistroCargo  = new AdministradorRegistroCargo(db);
 	}
 
 	public void menu() {
@@ -33,6 +38,7 @@ public class AdministradorRegistroEmpleado {
 				)
 			);
 
+
 			switch (opcion) {
 				case 1: crearEmpleado(); break;
 				case 2: editarEmpleadoInformacionPersonal(); break;
@@ -41,7 +47,7 @@ public class AdministradorRegistroEmpleado {
 				case 5: listarEmpleados(); break;
 				case 6: eliminarEmpleado(); break;
 				case 7:
-					crudCargo.menu();
+					administradorRegistroCargo.menu();
 					break;
 				case 8:
 					return;
@@ -51,6 +57,7 @@ public class AdministradorRegistroEmpleado {
 		}
 
 		}
+
 
 		public void crearEmpleado(){
 
@@ -65,18 +72,18 @@ public class AdministradorRegistroEmpleado {
 			Integer cargoId = (Integer) leerValorPorConsola("Id Cargo: ", Integer.class);
 
 
-			Municipio municipio = personaDAO.municipioDAO.buscarPorId(municipioId);
+			Municipio municipio = controladorMunicipio.obtenerMunicipio(municipioId);
 			Direccion direccion = new Direccion(calle, carrera, coordenada, descripcion,municipio);
-			Cargo cargo = empleadoDAO.cargoDAO.buscarPorId(cargoId);
+			Cargo cargo = controladorCargo.obtenerCargo(cargoId);
 			Empleado empleado = new Empleado(nombres, apellidos, direccion, salario, cargo);
-			empleadoDAO.guardar(empleado);
+			controladorEmpleado.crearEmpleado(empleado);
 			System.out.print("\n.......Empleado creado exitosamente\n");
 
 		}
 
 		public void obtenerEmpleado(){
 			Integer id = (Integer) leerValorPorConsola("Id de empleado: ", Integer.class);
-			Empleado empleado = empleadoDAO.buscarPorId(id);
+			Empleado empleado = controladorEmpleado.obtenerEmpleado(id);
 			List<String> campos = new ArrayList<>(List.of(
 				"ID", "nombres", "apellidos", "calle", "carrera", "coordenada", "descripcion", "municipio",
 				"salario", "cargo"));
@@ -91,11 +98,12 @@ public class AdministradorRegistroEmpleado {
 			mostrarInfo("Informacion Empleado", campos, valores);
 		}
 
+
 	public void editarEmpleadoInformacionPersonal(){
 		Integer id = (Integer) leerValorPorConsola("Id de empleado: ", Integer.class);
 
 		while(true) {
-			Empleado empleado = empleadoDAO.buscarPorId(id);
+			Empleado empleado = controladorEmpleado.obtenerEmpleado(id);
 			List<String> campos = new ArrayList<>(List.of(
 				"nombres", "apellidos", "calle", "carrera", "coordenada", "descripcion"));
 			List<String> valores = new ArrayList<>(
@@ -114,8 +122,8 @@ public class AdministradorRegistroEmpleado {
 				continue;
 			Object valor = leerValorPorConsola("Nuevo valor: ", String.class);
 
-			Integer personaId = empleadoDAO.obtenerIdPersona(id);
-			personaDAO.actualizar(personaId, campos.get(opcion - 1), valor);
+			Integer personaId = controladorEmpleado.obtenerIdPersona(id);
+			controladorPersona.editarPersona(personaId, campos.get(opcion - 1), valor);
 		}
 	}
 
@@ -124,7 +132,7 @@ public class AdministradorRegistroEmpleado {
 		Integer id = (Integer) leerValorPorConsola("Id de empleado: ", Integer.class);
 
 		while(true) {
-			Empleado empleado = empleadoDAO.buscarPorId(id);
+			Empleado empleado = controladorEmpleado.obtenerEmpleado(id);
 			List<String> campos = new ArrayList<>(List.of("salario"));
 			List<String> valores = new ArrayList<>(
 				List.of(
@@ -141,12 +149,12 @@ public class AdministradorRegistroEmpleado {
 			Object valor = leerValorPorConsola("Nuevo valor: ", String.class);
 
 
-			empleadoDAO.actualizar(id, campos.get(opcion - 1), valor);
+			controladorEmpleado.editarEmpleado(id, campos.get(opcion - 1), valor);
 		}
 	}
 
 	public void listarEmpleados(){
-		List<Empleado> empleados = empleadoDAO.buscarTodos();
+		List<Empleado> empleados = controladorEmpleado.listarEmpleados();
 		List<String> campos = new ArrayList<>(List.of(
 			"ID", "nombres", "apellidos", "calle", "carrera", "coordenada", "descripcion",
 			"municipio", "salario", "cargo"));
@@ -165,7 +173,7 @@ public class AdministradorRegistroEmpleado {
 
 	public void eliminarEmpleado(){
 		Integer id = (Integer) leerValorPorConsola("Id de empleado: ", Integer.class);
-		empleadoDAO.eliminarPorId(id);
+		controladorEmpleado.eliminarEmpleado(id);
 		System.out.print("\n.......Empleado eliminado exitosamente\n");
 	}
 

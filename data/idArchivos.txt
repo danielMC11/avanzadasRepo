@@ -1,0 +1,7 @@
+estudiante=0
+persona=0
+empleado=0
+municipio=0
+departamento=1
+cargo=0
+pais=2

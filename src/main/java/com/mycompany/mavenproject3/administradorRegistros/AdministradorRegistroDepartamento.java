@@ -1,10 +1,10 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
-import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorDeArchivos;
 import com.mycompany.mavenproject3.base.Departamento;
-import com.mycompany.mavenproject3.base.Pais;
 import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.persistencia.departamento.DepartamentoDAOImpl;
+import com.mycompany.mavenproject3.controlador.ControladorDepartamento;
+import com.mycompany.mavenproject3.controlador.ControladorPais;
+import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoBD;
 
 import java.util.List;
 
@@ -13,10 +13,12 @@ import static com.mycompany.mavenproject3.util.ConsolaUtil.*;
 import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 public class AdministradorRegistroDepartamento {
-	private final DepartamentoDAOImpl departamentoDAO;
+	private final ControladorDepartamento controladorDepartamento;
+	private final ControladorPais controladorPais;
 
 	public AdministradorRegistroDepartamento(H2Server db) {
-		this.departamentoDAO = new DepartamentoDAOImpl(db);
+		this.controladorDepartamento = new ControladorDepartamento(db);
+		this.controladorPais = new ControladorPais(db);
 	}
 
 	public void menu(){
@@ -44,9 +46,9 @@ public class AdministradorRegistroDepartamento {
 
 		String nombreDepartamento = (String) leerValorPorConsola("Nombre departamento: ", String.class);
 		Integer paisId = (Integer) leerValorPorConsola("Id pais: ", Integer.class);
-		Departamento departamento = new Departamento(nombreDepartamento, departamentoDAO.paisDAO.buscarPorId(paisId));
+		Departamento departamento = new Departamento(nombreDepartamento, controladorPais.obtenerPais(paisId));
 
-		departamentoDAO.guardar(departamento);
+		controladorDepartamento.crearDepartamento(departamento);
 
 		System.out.print("\n.......Departamento creado exitosamente\n");
 	}
@@ -56,25 +58,25 @@ public class AdministradorRegistroDepartamento {
 		Integer id = (Integer) leerValorPorConsola("Id departamento: ", Integer.class);
 		String nuevoNombre = (String) leerValorPorConsola("Nuevo nombre: ", String.class);
 
-		departamentoDAO.actualizar(id, "nombre", nuevoNombre);
+		controladorDepartamento.editarDepartamento(id, "Nombre", nuevoNombre);
 		System.out.print("\n.......Departamento actualizado exitosamente\n");
 	}
 
 	public void obtenerDepartamento(){
 		Integer id = (Integer) leerValorPorConsola("Id departamento: ", Integer.class);
-		Departamento departamento = departamentoDAO.buscarPorId(id);
+		Departamento departamento = controladorDepartamento.obtenerDepartamento(id);
 		System.out.println(departamento);
 	}
 
 	public void listarDepartamentos(){
-		for(Departamento departamento : departamentoDAO.buscarTodos()){
+		for(Departamento departamento : controladorDepartamento.listarDepartamentos()){
 			System.out.println(departamento);
 		}
 	}
 
 	public void eliminarDepartamento(){
 		Integer id = (Integer) leerValorPorConsola("Id departamento: ", Integer.class);
-		departamentoDAO.eliminarPorId(id);
+		controladorDepartamento.eliminarDepartamento(id);
 		System.out.print("\n.......Departamento eliminado exitosamente\n");
 	}
 

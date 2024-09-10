@@ -61,7 +61,7 @@ public class AdministradorRegistroEstudiantesInscritos {
 
     public void guardarEstudiantesInscritosArchivoBinario() {
         try {
-            AdministradorDeArchivos.escribirEnArchivoBinario(this.estudiantesInscritos, "EstudiantesInscritos.bin");
+            AdministradorDeArchivos.escribirEnArchivoBinario(this.estudiantesInscritos, "./data/ArchivosBinario/EstudiantesInscritos.bin");
         } catch (IOException exception) {
             exception.printStackTrace(System.out);
         }
@@ -69,7 +69,7 @@ public class AdministradorRegistroEstudiantesInscritos {
     public void cargarInformacionEstudiantesInscritos(){
         EstudiantesInscritos estudiantes = null;
         try {
-            estudiantes = (EstudiantesInscritos) AdministradorDeArchivos.cargarObjetoDesdeArchivoBinario("EstudiantesInscritos.bin");
+            estudiantes = (EstudiantesInscritos) AdministradorDeArchivos.cargarObjetoDesdeArchivoBinario("./data/ArchivosBinario/EstudiantesInscritos.bin");
         }catch (IOException | ClassNotFoundException exception){
             exception.printStackTrace(System.out);
         }

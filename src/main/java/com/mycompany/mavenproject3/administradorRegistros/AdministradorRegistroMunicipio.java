@@ -1,12 +1,11 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 
-import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorDeArchivos;
-import com.mycompany.mavenproject3.base.Departamento;
 import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.base.Pais;
 import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.persistencia.municipio.MunicipioDAOImpl;
+import com.mycompany.mavenproject3.controlador.ControladorDepartamento;
+import com.mycompany.mavenproject3.controlador.ControladorMunicipio;
+import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
 import java.util.List;
 
@@ -14,10 +13,15 @@ import static com.mycompany.mavenproject3.util.ConsolaUtil.*;
 import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 public class AdministradorRegistroMunicipio {
-	private final MunicipioDAOImpl municipioDAO;
+	private final ControladorMunicipio controladorMunicipio;
+	private final ControladorDepartamento controladorDepartamento;
+
 
 	public AdministradorRegistroMunicipio(H2Server db) {
-		this.municipioDAO = new MunicipioDAOImpl(db);
+
+		this.controladorMunicipio = new ControladorMunicipio(db);
+		this.controladorDepartamento = new ControladorDepartamento(db);
+
 	}
 
 	public void menu(){
@@ -44,8 +48,8 @@ public class AdministradorRegistroMunicipio {
 	public void crearMunicipio(){
 		String nombreMunicipio = (String) leerValorPorConsola("Nombre municipio: ", String.class);
 		Integer departamentoId = (Integer) leerValorPorConsola("Id departamento: ", Integer.class);
-		Municipio municipio = new Municipio(nombreMunicipio, municipioDAO.departamentoDAO.buscarPorId(departamentoId));
-		municipioDAO.guardar(municipio);
+		Municipio municipio = new Municipio(nombreMunicipio, controladorDepartamento.obtenerDepartamento(departamentoId));
+		controladorMunicipio.crearMunicipio(municipio);
 		System.out.print("\n.......Municipio creado exitosamente\n");
 	}
 
@@ -54,25 +58,25 @@ public class AdministradorRegistroMunicipio {
 		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
 		String nuevoNombre = (String) leerValorPorConsola("Nuevo nombre: ", String.class);
 
-		municipioDAO.actualizar(id, "nombre", nuevoNombre);
+		controladorMunicipio.editarMunicipio(id, "nombre", nuevoNombre);
 		System.out.print("\n.......Municipio actualizado exitosamente\n");
 	}
 
 	public void obtenerMunicipio(){
 		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
-		Municipio municipio = municipioDAO.buscarPorId(id);
+		Municipio municipio = controladorMunicipio.obtenerMunicipio(id);
 		System.out.println(municipio);
 	}
 
 	public void listarMunicipios(){
-		for(Municipio municipio : municipioDAO.buscarTodos()){
+		for(Municipio municipio : controladorMunicipio.listarMunicipios()){
 			System.out.println(municipio);
 		}
 	}
 
 	public void eliminarMunicipio(){
 		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
-		municipioDAO.eliminarPorId(id);
+		controladorMunicipio.eliminarMunicipio(id);
 		System.out.print("\n.......Municipio eliminado exitosamente\n");
 	}
 }

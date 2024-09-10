@@ -51,6 +51,8 @@ public class PersistenciaPaisArchivoPlano implements PersistenciaPais{
 				}
 			}
 			escribirLineas(rutaArchivo, nuevasLineas);
+			System.out.println("Pais editado exitosamente en " + rutaArchivo);
+
 		} catch (Exception e) {
 			System.out.println("Error al editar el archivo CSV: " + e.getMessage());
 		}
@@ -73,7 +75,7 @@ public class PersistenciaPaisArchivoPlano implements PersistenciaPais{
 			}
 
 		} catch (Exception e) {
-			System.out.println("Error al editar el archivo CSV: " + e.getMessage());
+			System.out.println("Error al obtener: " + e.getMessage());
 		}
 
 		return pais;
@@ -95,7 +97,7 @@ public class PersistenciaPaisArchivoPlano implements PersistenciaPais{
 			}
 
 		} catch (Exception e) {
-			System.out.println("Error al editar el archivo CSV: " + e.getMessage());
+			System.out.println("Error al listar: " + e.getMessage());
 		}
 
 		return paises;
@@ -116,9 +118,10 @@ public class PersistenciaPaisArchivoPlano implements PersistenciaPais{
 			}
 
 			escribirLineas(rutaArchivo, nuevasLineas);
+			System.out.println("Pais eliminado exitosamente en " + rutaArchivo);
 
 		} catch (Exception e) {
-			System.out.println("Error al editar el archivo CSV: " + e.getMessage());
+			System.out.println("Error al eliminar: " + e.getMessage());
 		}
 	}
 
