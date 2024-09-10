@@ -8,15 +8,15 @@ Daniel Ricardo Montero - 160004719
 //
 package com.mycompany.mavenproject3;
 
-import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroEstudiantesInscritos;
-import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroPersonalInscrito;
-import com.mycompany.mavenproject3.agrupamiento.*;
+import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorRegistroEstudiantesInscritos;
+import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorRegistroPersonalInscrito;
+import com.mycompany.mavenproject3.administradorRegistros.menus.Locaciones;
+import com.mycompany.mavenproject3.administradorRegistros.menus.Personal;
 import com.mycompany.mavenproject3.config.*;
-
+import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 import java.util.*;
 
-import static com.mycompany.mavenproject3.Util.mostrarMenu;
 
 
 /**
@@ -28,20 +28,18 @@ import static com.mycompany.mavenproject3.Util.mostrarMenu;
 
 public class Main {
 
+		public static void main(String[] args) {
 
-    public static void main(String[] args) {
-
-
-			H2Server db = new H2Server(Modo.EMBEBIDO);
+			H2Server db = new H2Server("org.h2.Driver","sa","","jdbc:h2:./data/4719_4733");
 			db.inicializar();
 			AdministradorRegistroEstudiantesInscritos administradorRegistroEstudiantesInscritos = new AdministradorRegistroEstudiantesInscritos();
-			AdministradorRegistroPersonalInscrito administradorRegistroPersonalInscrito= new AdministradorRegistroPersonalInscrito();
-			while(true) {
+			AdministradorRegistroPersonalInscrito administradorRegistroPersonalInscrito = new AdministradorRegistroPersonalInscrito();
+			while (true) {
 				int opcion = mostrarMenu("MENU Principal",
-										List.of("Menu locaciones", "Menu Personal","Menu Estudiantes inscritos",
-														"Menu Personal inscritos",
-														"Salir"
-											)
+					List.of("Menu locaciones", "Menu Personal", "Menu Estudiantes inscritos",
+						"Menu Personal inscritos",
+						"Salir"
+					)
 				);
 
 
@@ -55,12 +53,15 @@ public class Main {
 						per.menu();
 						break;
 					case 3:
-						administradorRegistroEstudiantesInscritos.menu(); break;
-					case 4:administradorRegistroPersonalInscrito.menu(); break;
+						administradorRegistroEstudiantesInscritos.menu();
+						break;
+					case 4:
+						administradorRegistroPersonalInscrito.menu();
+						break;
 					case 5:
-						db.terminar();
-					return;
-					default: break;
+						return;
+					default:
+						break;
 				}
 
 			}

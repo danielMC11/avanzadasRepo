@@ -1,20 +1,22 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
-import com.mycompany.mavenproject3.base.Cargo;
 import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.dao.baseDeDatos.cargo.CargoDAOImpl;
+import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
 
 import java.util.List;
 
-import static com.mycompany.mavenproject3.Util.leerValorPorConsola;
-import static com.mycompany.mavenproject3.Util.mostrarMenu;
+import static com.mycompany.mavenproject3.util.MenuUtil.*;
+
 
 public class AdministradorRegistroCargo {
 
-	private final CargoDAOImpl cargoDAO;
+	private final PersistenciaCargoBD cargoDAO;
+//	private final PersistenciaCargo persistencia;
 
 	public AdministradorRegistroCargo(H2Server db) {
-		this.cargoDAO = new CargoDAOImpl(db);
+
+		this.cargoDAO = new PersistenciaCargoBD(db);
+		//this.persistencia = new PersistenciaCargoArchivoPlano();
 	}
 
 	public void menu() {
@@ -24,31 +26,20 @@ public class AdministradorRegistroCargo {
 					"Listar cargos", "Eliminar cargo","Guardar cargo en archivo plano","Ver los cargos registrados en el archivo plano", "Salir"
 				)
 			);
-
+/*
 			switch (opcion) {
 				case 1:	crearCargo(); break;
 				case 2: editarCargo(); break;
 				case 3:	obtenerCargo(); break;
 				case 4: listarCargos(); break;
 				case 5: eliminarCargo(); break;
-				case 6: guardarCargoArchivoPlano(); break;
-				case 7: AdministradorDeArchivos.leerArchivoPlano("Cargo.txt");
-				case 8: return;
+				case 6: return;
 				default: break;
-			}
+			}*/
 
 		}
 	}
-
-	public void guardarCargoArchivoPlano(){
-		String nombreArchivo = "Cargo.txt";
-		Integer idCargo = (Integer) leerValorPorConsola("id cargo: ", Integer.class);
-		String nombreCargo = (String) leerValorPorConsola("Nombre cargo: ", String.class);
-		Cargo cargo = new Cargo(idCargo,nombreCargo);
-		AdministradorDeArchivos.escribirEnArchivo(cargo,nombreArchivo);
-		System.out.println("\n------El archivo se guardo en "+nombreArchivo+".txt exitosamente\n");
-	}
-
+/*
 	public void crearCargo(){
 		String nombreCargo = (String) leerValorPorConsola("Nombre cargo: ", String.class);
 		Cargo cargo = new Cargo(nombreCargo);
@@ -83,5 +74,5 @@ public class AdministradorRegistroCargo {
 	}
 
 
-
+*/
 }

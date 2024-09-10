@@ -14,8 +14,9 @@ import java.io.Serializable;
  */
 public class Cargo implements Todos, Serializable {
 
-	private  static  final  long serialVersionUID = 1L;
-    private Integer id;
+	// private  static  final  long serialVersionUID = 1L;
+
+    private Integer id ;
     private String nombre;
 
 	public Cargo(){
@@ -28,7 +29,7 @@ public class Cargo implements Todos, Serializable {
         this.nombre = nombre;
     }
 		public Cargo(String nombre){
-			this.nombre = nombre;
+		this.nombre = nombre;
 		}
 
     @Override

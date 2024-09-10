@@ -1,13 +1,15 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
+import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorDeArchivos;
 import com.mycompany.mavenproject3.base.*;
 import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.dao.baseDeDatos.estudiante.EstudianteDAOImpl;
-import com.mycompany.mavenproject3.dao.baseDeDatos.persona.PersonaDAOImpl;
+import com.mycompany.mavenproject3.persistencia.estudiante.EstudianteDAOImpl;
+import com.mycompany.mavenproject3.persistencia.persona.PersonaDAOImpl;
 
 import java.util.*;
 
-import static com.mycompany.mavenproject3.Util.*;
+import static com.mycompany.mavenproject3.util.ConsolaUtil.*;
+import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 public class AdministradorRegistroEstudiante {
 	private final EstudianteDAOImpl estudianteDAO;
@@ -24,7 +26,7 @@ public class AdministradorRegistroEstudiante {
 			int opcion = mostrarMenu("MENU ESTUDIANTE",
 				List.of("Crear estudiante", "Editar informacion personal",
 					"Editar informacion academica","Obtener estudiante",
-					"Listar estudiantes", "Eliminar estudiante", "Guardar Estudiante en archivo plano","Ver los Estudiantos registrados en el archivo plano","Salir"
+					"Listar estudiantes", "Eliminar estudiante","Salir"
 				)
 			);
 
@@ -35,42 +37,11 @@ public class AdministradorRegistroEstudiante {
 				case 4: obtenerEstudiante();break;
 				case 5: listarEstudiantes(); break;
 				case 6: eliminarEstudiante(); break;
-				case 7: guardarEstudianteArchivo();
-				case 8: AdministradorDeArchivos.leerArchivoPlano("Estudiantes.txt");
 				case 9: return;
 				default: break;
 			}
 
 		}
-	}
-
-	void guardarEstudianteArchivo(){
-		String nombreArchivo = "Estudiantes.txt";
-
-		Integer idEstudiante = (Integer) leerValorPorConsola("Id empleado: ",Integer.class);
-		String nombres = (String) leerValorPorConsola("Nombres empleado: ", String.class);
-		String apellidos = (String) leerValorPorConsola("Apellidos empleado: ", String.class);
-		String codigo = (String) leerValorPorConsola("Codigo: ", String.class);
-		String programa = (String) leerValorPorConsola("Programa: ", String.class);
-		Double promedio = (Double) leerValorPorConsola("Promedio: ", Double.class);
-		String calle = (String) leerValorPorConsola("Calle: ", String.class);
-		String carrera = (String) leerValorPorConsola("Carrera: ", String.class);
-		String coordenada = (String) leerValorPorConsola("Coordenada: ", String.class);
-		String descripcion = (String) leerValorPorConsola("Descripcion: ", String.class);
-		Integer municipioId = (Integer) leerValorPorConsola("Id Municipio: ", Integer.class);
-		String nombreMunicipio = (String) leerValorPorConsola("Nombre municipio:",String.class);
-		Integer idDepartamento = (Integer) leerValorPorConsola("Id Departamento: ", Integer.class);
-		String nombreDepartamento = (String) leerValorPorConsola("Nombre departamento: ", String.class);
-		Integer paisId = (Integer) leerValorPorConsola("Id pais: ", Integer.class);
-		String nombrePais = (String) leerValorPorConsola("Nombre pais: ", String.class);
-
-		Pais pais = new Pais(paisId,nombrePais);
-		Departamento departamento = new Departamento(idDepartamento,nombreDepartamento,pais);
-		Municipio municipio = new Municipio(municipioId,nombreMunicipio,departamento);
-		Direccion direccion = new Direccion(calle,carrera,coordenada,descripcion,municipio);
-		Estudiante estudiante = new Estudiante(idEstudiante,nombres,apellidos,direccion,codigo,programa,promedio);
-		System.out.println("\n------El archivo se guardo en "+nombreArchivo+".txt exitosamente\n");
-		AdministradorDeArchivos.escribirEnArchivo(estudiante,nombreArchivo);
 	}
 
 
