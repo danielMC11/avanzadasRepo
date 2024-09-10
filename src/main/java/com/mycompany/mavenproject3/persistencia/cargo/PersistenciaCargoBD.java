@@ -3,6 +3,7 @@ package com.mycompany.mavenproject3.persistencia.cargo;
 import com.mycompany.mavenproject3.base.Cargo;
 
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 
 
 import java.sql.Connection;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenciaCargoBD implements PersistenciaCargo {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 
-	public PersistenciaCargoBD(H2Server db) {
+	public PersistenciaCargoBD(AdaptadorBaseDatos db) {
 		this.db = db;
 	}
 

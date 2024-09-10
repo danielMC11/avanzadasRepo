@@ -4,6 +4,7 @@ import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorD
 import com.mycompany.mavenproject3.base.Departamento;
 import com.mycompany.mavenproject3.base.Pais;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.departamento.DepartamentoDAOImpl;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import static com.mycompany.mavenproject3.util.MenuUtil.*;
 public class AdministradorRegistroDepartamento {
 	private final DepartamentoDAOImpl departamentoDAO;
 
-	public AdministradorRegistroDepartamento(H2Server db) {
+	public AdministradorRegistroDepartamento(AdaptadorBaseDatos db) {
 		this.departamentoDAO = new DepartamentoDAOImpl(db);
 	}
 

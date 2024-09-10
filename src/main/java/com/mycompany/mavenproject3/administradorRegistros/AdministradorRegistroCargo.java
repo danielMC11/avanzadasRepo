@@ -1,6 +1,7 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class AdministradorRegistroCargo {
 	private final PersistenciaCargoBD cargoDAO;
 //	private final PersistenciaCargo persistencia;
 
-	public AdministradorRegistroCargo(H2Server db) {
+	public AdministradorRegistroCargo(AdaptadorBaseDatos db) {
 
 		this.cargoDAO = new PersistenciaCargoBD(db);
 		//this.persistencia = new PersistenciaCargoArchivoPlano();

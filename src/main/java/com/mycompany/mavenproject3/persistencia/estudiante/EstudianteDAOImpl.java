@@ -5,6 +5,7 @@ import com.mycompany.mavenproject3.base.Estudiante;
 import com.mycompany.mavenproject3.base.Persona;
 import com.mycompany.mavenproject3.config.H2Server;
 
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.persona.PersonaDAO;
 import com.mycompany.mavenproject3.persistencia.persona.PersonaDAOImpl;
 
@@ -14,12 +15,12 @@ import java.util.List;
 
 
 public class EstudianteDAOImpl implements EstudianteDAO{
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 
 	private PersonaDAO personaDAO;
 
 
-	public EstudianteDAOImpl(H2Server db) {
+	public EstudianteDAOImpl(AdaptadorBaseDatos db) {
 		this.db = db;
 		personaDAO = new PersonaDAOImpl(db);
 	}

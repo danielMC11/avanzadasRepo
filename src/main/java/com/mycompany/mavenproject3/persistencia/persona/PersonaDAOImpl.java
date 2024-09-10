@@ -3,6 +3,7 @@ package com.mycompany.mavenproject3.persistencia.persona;
 import com.mycompany.mavenproject3.base.Direccion;
 import com.mycompany.mavenproject3.base.Persona;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.municipio.MunicipioDAO;
 import com.mycompany.mavenproject3.persistencia.municipio.MunicipioDAOImpl;
 
@@ -10,10 +11,10 @@ import java.sql.*;
 import java.util.List;
 
 public class PersonaDAOImpl implements PersonaDAO{
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 	public MunicipioDAO municipioDAO;
 
-	public PersonaDAOImpl(H2Server db) {
+	public PersonaDAOImpl(AdaptadorBaseDatos db) {
 
 		this.db = db;
 		municipioDAO = new MunicipioDAOImpl(db);

@@ -4,6 +4,7 @@ import com.mycompany.mavenproject3.base.Empleado;
 
 import com.mycompany.mavenproject3.base.Persona;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargo;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
 
@@ -17,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmpleadoDAOImpl implements EmpleadoDAO{
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 
 	private PersonaDAO personaDAO;
 
 	public PersistenciaCargo cargoDAO;
 
 
-	public EmpleadoDAOImpl(H2Server db) {
+	public EmpleadoDAOImpl(AdaptadorBaseDatos db) {
 		this.db = db;
 		personaDAO = new PersonaDAOImpl(db);
 		cargoDAO = new PersistenciaCargoBD(db);

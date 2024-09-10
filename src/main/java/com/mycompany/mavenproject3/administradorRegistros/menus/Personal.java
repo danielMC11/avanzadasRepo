@@ -3,6 +3,7 @@ package com.mycompany.mavenproject3.administradorRegistros.menus;
 import com.mycompany.mavenproject3.config.H2Server;
 import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroEmpleado;
 import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroEstudiante;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Personal {
 
 	AdministradorRegistroEmpleado administradorRegistroEmpleado;
 
-	public Personal(H2Server db){
+	public Personal(AdaptadorBaseDatos db){
 
 		administradorRegistroEstudiante = new AdministradorRegistroEstudiante(db);
 		administradorRegistroEmpleado = new AdministradorRegistroEmpleado(db);

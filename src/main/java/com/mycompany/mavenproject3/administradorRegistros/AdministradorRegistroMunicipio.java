@@ -6,6 +6,7 @@ import com.mycompany.mavenproject3.base.Departamento;
 import com.mycompany.mavenproject3.base.Municipio;
 import com.mycompany.mavenproject3.base.Pais;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.municipio.MunicipioDAOImpl;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import static com.mycompany.mavenproject3.util.MenuUtil.*;
 public class AdministradorRegistroMunicipio {
 	private final MunicipioDAOImpl municipioDAO;
 
-	public AdministradorRegistroMunicipio(H2Server db) {
+	public AdministradorRegistroMunicipio(AdaptadorBaseDatos db) {
 		this.municipioDAO = new MunicipioDAOImpl(db);
 	}
 

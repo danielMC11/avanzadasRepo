@@ -3,6 +3,7 @@ package com.mycompany.mavenproject3.administradorRegistros;
 import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorDeArchivos;
 import com.mycompany.mavenproject3.base.*;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.empleado.EmpleadoDAOImpl;
 import com.mycompany.mavenproject3.persistencia.persona.PersonaDAOImpl;
 
@@ -18,7 +19,7 @@ public class AdministradorRegistroEmpleado {
 
 	private final AdministradorRegistroCargo crudCargo;
 
-	public AdministradorRegistroEmpleado(H2Server db) {
+	public AdministradorRegistroEmpleado(AdaptadorBaseDatos db) {
 		this.empleadoDAO = new EmpleadoDAOImpl(db);
 		this.personaDAO = new PersonaDAOImpl(db);
 		this.crudCargo  = new AdministradorRegistroCargo(db);

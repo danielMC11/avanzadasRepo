@@ -2,6 +2,7 @@ package com.mycompany.mavenproject3.persistencia.departamento;
 
 import com.mycompany.mavenproject3.base.Departamento;
 import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.pais.PersistenciaPais;
 import com.mycompany.mavenproject3.persistencia.pais.PersistenciaPaisBD;
 
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DepartamentoDAOImpl implements DepartamentoDAO {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 	public PersistenciaPais paisDAO;
-	public DepartamentoDAOImpl(H2Server db){
+	public DepartamentoDAOImpl(AdaptadorBaseDatos db){
 		this.db = db;
 		paisDAO = new PersistenciaPaisBD(db);
 	}
