@@ -1,12 +1,9 @@
 package com.mycompany.mavenproject3.controlador;
 
 import com.mycompany.mavenproject3.base.Cargo;
-import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargo;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
-import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipio;
-import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.List;
 public class ControladorCargo {
 	private final List<PersistenciaCargo> metodosPersistencia = new ArrayList<>();
 
-	public ControladorCargo(H2Server db){
+	public ControladorCargo(AdaptadorBaseDatos db){
 		metodosPersistencia.add(new PersistenciaCargoBD(db));
 	}
 

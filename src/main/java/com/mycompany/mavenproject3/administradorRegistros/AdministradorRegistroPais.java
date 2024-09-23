@@ -1,7 +1,7 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 import com.mycompany.mavenproject3.base.Pais;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.controlador.ControladorPais;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import static com.mycompany.mavenproject3.util.MenuUtil.*;
 public class AdministradorRegistroPais {
 	private final ControladorPais controladorPais;
 
-	public AdministradorRegistroPais(H2Server db) {
+	public AdministradorRegistroPais(AdaptadorBaseDatos db) {
 		this.controladorPais = new ControladorPais(db);
 	}
 

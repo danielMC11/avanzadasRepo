@@ -3,7 +3,7 @@ package com.mycompany.mavenproject3.persistencia.estudiante;
 import com.mycompany.mavenproject3.base.Estudiante;
 
 import com.mycompany.mavenproject3.base.Persona;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 
 import com.mycompany.mavenproject3.persistencia.persona.PersistenciaPersona;
 import com.mycompany.mavenproject3.persistencia.persona.PersistenciaPersonaBD;
@@ -14,12 +14,12 @@ import java.util.List;
 
 
 public class PersistenciaEstudianteBD implements PersistenciaEstudiante {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 
 	private PersistenciaPersona persistenciaPersona;
 
 
-	public PersistenciaEstudianteBD(H2Server db) {
+	public PersistenciaEstudianteBD(AdaptadorBaseDatos db) {
 		this.db = db;
 		persistenciaPersona = new PersistenciaPersonaBD(db);
 	}

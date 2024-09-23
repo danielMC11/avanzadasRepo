@@ -1,7 +1,7 @@
 package com.mycompany.mavenproject3.administradorRegistros.menus;
 
 
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroDepartamento;
 import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroMunicipio;
 import com.mycompany.mavenproject3.administradorRegistros.AdministradorRegistroPais;
@@ -16,7 +16,7 @@ public class Locaciones {
 
 	private final AdministradorRegistroMunicipio administradorRegistroMunicipio;
 
-	public Locaciones(H2Server db) {
+	public Locaciones(AdaptadorBaseDatos db) {
 		this.administradorRegistroPais = new AdministradorRegistroPais(db);
 		this.administradorRegistroDepartamento = new AdministradorRegistroDepartamento(db);
 		this.administradorRegistroMunicipio = new AdministradorRegistroMunicipio(db);

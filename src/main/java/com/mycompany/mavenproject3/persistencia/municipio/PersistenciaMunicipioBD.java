@@ -1,7 +1,7 @@
 package com.mycompany.mavenproject3.persistencia.municipio;
 
 import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamento;
 import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoBD;
 
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenciaMunicipioBD implements PersistenciaMunicipio {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 	public PersistenciaDepartamento persistenciaDepartamento;
 
-	public PersistenciaMunicipioBD(H2Server db) {
+	public PersistenciaMunicipioBD(AdaptadorBaseDatos db) {
 		this.db = db;
 		persistenciaDepartamento = new PersistenciaDepartamentoBD(db);
 	}

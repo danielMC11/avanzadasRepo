@@ -1,14 +1,10 @@
 package com.mycompany.mavenproject3.controlador;
 
 import com.mycompany.mavenproject3.base.Departamento;
-import com.mycompany.mavenproject3.base.Pais;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamento;
 import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoArchivoPlano;
 import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoBD;
-import com.mycompany.mavenproject3.persistencia.pais.PersistenciaPais;
-import com.mycompany.mavenproject3.persistencia.pais.PersistenciaPaisArchivoPlano;
-import com.mycompany.mavenproject3.persistencia.pais.PersistenciaPaisBD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +12,7 @@ import java.util.List;
 public class ControladorDepartamento {
 	private final List<PersistenciaDepartamento> metodosPersistencia = new ArrayList<>();
 
-	public ControladorDepartamento(H2Server db){
+	public ControladorDepartamento(AdaptadorBaseDatos db){
 		metodosPersistencia.add(new PersistenciaDepartamentoBD(db));
 		metodosPersistencia.add(new PersistenciaDepartamentoArchivoPlano());
 	}

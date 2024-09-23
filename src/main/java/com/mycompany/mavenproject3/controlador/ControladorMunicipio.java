@@ -1,12 +1,9 @@
 package com.mycompany.mavenproject3.controlador;
 
-import com.mycompany.mavenproject3.base.Departamento;
 import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.config.H2Server;
-import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamento;
-import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoArchivoPlano;
-import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoBD;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipio;
+import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioArchivoPlano;
 import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
 import java.util.ArrayList;
@@ -15,8 +12,10 @@ import java.util.List;
 public class ControladorMunicipio {
 	private final List<PersistenciaMunicipio> metodosPersistencia = new ArrayList<>();
 
-	public ControladorMunicipio(H2Server db){
+	public ControladorMunicipio(AdaptadorBaseDatos db){
+
 		metodosPersistencia.add(new PersistenciaMunicipioBD(db));
+		metodosPersistencia.add(new PersistenciaMunicipioArchivoPlano());
 	}
 
 	public void crearMunicipio(Municipio municipio){

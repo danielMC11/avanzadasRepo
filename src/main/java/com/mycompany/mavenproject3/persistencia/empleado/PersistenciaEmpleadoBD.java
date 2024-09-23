@@ -3,7 +3,7 @@ package com.mycompany.mavenproject3.persistencia.empleado;
 import com.mycompany.mavenproject3.base.Empleado;
 
 import com.mycompany.mavenproject3.base.Persona;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargo;
 import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
 
@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenciaEmpleadoBD implements PersistenciaEmpleado {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 
 	private PersistenciaPersona persistenciaPersona;
 
 	public PersistenciaCargo cargoDAO;
 
 
-	public PersistenciaEmpleadoBD(H2Server db) {
+	public PersistenciaEmpleadoBD(AdaptadorBaseDatos db) {
 		this.db = db;
 		persistenciaPersona = new PersistenciaPersonaBD(db);
 		cargoDAO = new PersistenciaCargoBD(db);

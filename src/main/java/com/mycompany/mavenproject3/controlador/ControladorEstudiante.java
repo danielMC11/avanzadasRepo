@@ -1,12 +1,9 @@
 package com.mycompany.mavenproject3.controlador;
 
 import com.mycompany.mavenproject3.base.Estudiante;
-import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.estudiante.PersistenciaEstudiante;
 import com.mycompany.mavenproject3.persistencia.estudiante.PersistenciaEstudianteBD;
-import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipio;
-import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.List;
 public class ControladorEstudiante {
 	private final List<PersistenciaEstudiante> metodosPersistencia = new ArrayList<>();
 
-	public ControladorEstudiante(H2Server db){
+	public ControladorEstudiante(AdaptadorBaseDatos db){
 		metodosPersistencia.add(new PersistenciaEstudianteBD(db));
 	}
 

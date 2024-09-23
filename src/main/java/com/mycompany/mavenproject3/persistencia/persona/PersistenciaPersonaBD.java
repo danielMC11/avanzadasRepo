@@ -2,7 +2,7 @@ package com.mycompany.mavenproject3.persistencia.persona;
 
 import com.mycompany.mavenproject3.base.Direccion;
 import com.mycompany.mavenproject3.base.Persona;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipio;
 import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
@@ -10,10 +10,10 @@ import java.sql.*;
 import java.util.List;
 
 public class PersistenciaPersonaBD implements PersistenciaPersona {
-	private final H2Server db;
+	private final AdaptadorBaseDatos db;
 	public PersistenciaMunicipio persistenciaMunicipio;
 
-	public PersistenciaPersonaBD(H2Server db) {
+	public PersistenciaPersonaBD(AdaptadorBaseDatos db) {
 
 		this.db = db;
 		persistenciaMunicipio = new PersistenciaMunicipioBD(db);

@@ -57,6 +57,8 @@ public class PersistenciaDepartamentoArchivoPlano  implements PersistenciaDepart
 				}
 			}
 			escribirLineas(rutaArchivo, nuevasLineas);
+			System.out.println("Departamento editado exitosamente en " + rutaArchivo);
+
 		} catch (Exception e) {
 			System.out.println("Error al editar: " + e.getMessage());
 		}
@@ -125,6 +127,7 @@ public class PersistenciaDepartamentoArchivoPlano  implements PersistenciaDepart
 			}
 
 			escribirLineas(rutaArchivo, nuevasLineas);
+			System.out.println("Departamento eliminado exitosamente en " + rutaArchivo);
 
 		} catch (Exception e) {
 			System.out.println("Error al eliminar: " + e.getMessage());

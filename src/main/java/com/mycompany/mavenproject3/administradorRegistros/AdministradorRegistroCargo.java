@@ -1,9 +1,8 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 import com.mycompany.mavenproject3.base.Cargo;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.controlador.ControladorCargo;
-import com.mycompany.mavenproject3.persistencia.cargo.PersistenciaCargoBD;
 
 import java.util.List;
 
@@ -17,7 +16,8 @@ public class AdministradorRegistroCargo {
 	private final ControladorCargo controladorCargo;
 
 
-	public AdministradorRegistroCargo(H2Server db) {
+	public AdministradorRegistroCargo(AdaptadorBaseDatos db) {
+
 		this.controladorCargo = new ControladorCargo(db);
 	}
 

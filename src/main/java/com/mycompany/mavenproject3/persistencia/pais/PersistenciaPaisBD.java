@@ -2,7 +2,7 @@ package com.mycompany.mavenproject3.persistencia.pais;
 
 import com.mycompany.mavenproject3.base.Pais;
 
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 
 
 import java.sql.Connection;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenciaPaisBD implements PersistenciaPais {
-	H2Server db;
-	public PersistenciaPaisBD(H2Server db){
+	AdaptadorBaseDatos db;
+	public PersistenciaPaisBD(AdaptadorBaseDatos db){
 		this.db = db;
 	}
 	@Override

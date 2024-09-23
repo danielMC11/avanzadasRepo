@@ -1,10 +1,9 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 import com.mycompany.mavenproject3.base.Departamento;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.controlador.ControladorDepartamento;
 import com.mycompany.mavenproject3.controlador.ControladorPais;
-import com.mycompany.mavenproject3.persistencia.departamento.PersistenciaDepartamentoBD;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class AdministradorRegistroDepartamento {
 	private final ControladorDepartamento controladorDepartamento;
 	private final ControladorPais controladorPais;
 
-	public AdministradorRegistroDepartamento(H2Server db) {
+	public AdministradorRegistroDepartamento(AdaptadorBaseDatos db) {
 		this.controladorDepartamento = new ControladorDepartamento(db);
 		this.controladorPais = new ControladorPais(db);
 	}

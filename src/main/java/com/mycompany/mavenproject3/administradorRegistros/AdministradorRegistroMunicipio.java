@@ -2,10 +2,9 @@ package com.mycompany.mavenproject3.administradorRegistros;
 
 
 import com.mycompany.mavenproject3.base.Municipio;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.controlador.ControladorDepartamento;
 import com.mycompany.mavenproject3.controlador.ControladorMunicipio;
-import com.mycompany.mavenproject3.persistencia.municipio.PersistenciaMunicipioBD;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class AdministradorRegistroMunicipio {
 	private final ControladorDepartamento controladorDepartamento;
 
 
-	public AdministradorRegistroMunicipio(H2Server db) {
+	public AdministradorRegistroMunicipio(AdaptadorBaseDatos db) {
 
 		this.controladorMunicipio = new ControladorMunicipio(db);
 		this.controladorDepartamento = new ControladorDepartamento(db);
@@ -58,7 +57,7 @@ public class AdministradorRegistroMunicipio {
 		Integer id = (Integer) leerValorPorConsola("Id municipio: ", Integer.class);
 		String nuevoNombre = (String) leerValorPorConsola("Nuevo nombre: ", String.class);
 
-		controladorMunicipio.editarMunicipio(id, "nombre", nuevoNombre);
+		controladorMunicipio.editarMunicipio(id, "Nombre", nuevoNombre);
 		System.out.print("\n.......Municipio actualizado exitosamente\n");
 	}
 

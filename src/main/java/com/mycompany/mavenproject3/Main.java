@@ -12,7 +12,10 @@ import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorR
 import com.mycompany.mavenproject3.administradorRegistros.binario.AdministradorRegistroPersonalInscrito;
 import com.mycompany.mavenproject3.administradorRegistros.menus.Locaciones;
 import com.mycompany.mavenproject3.administradorRegistros.menus.Personal;
-import com.mycompany.mavenproject3.config.*;
+
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
+import com.mycompany.mavenproject3.config.fabricas.FabricaBaseDeDatos;
+
 import static com.mycompany.mavenproject3.util.MenuUtil.*;
 
 import java.util.*;
@@ -30,7 +33,7 @@ public class Main {
 
 		public static void main(String[] args) {
 
-			H2Server db = new H2Server("org.h2.Driver","sa","","jdbc:h2:./data/4719_4733");
+			AdaptadorBaseDatos db = FabricaBaseDeDatos.obtenerAdaptador("H2");
 			db.inicializar();
 			AdministradorRegistroEstudiantesInscritos administradorRegistroEstudiantesInscritos = new AdministradorRegistroEstudiantesInscritos();
 			AdministradorRegistroPersonalInscrito administradorRegistroPersonalInscrito = new AdministradorRegistroPersonalInscrito();

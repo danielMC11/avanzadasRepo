@@ -1,12 +1,10 @@
 package com.mycompany.mavenproject3.administradorRegistros;
 
 import com.mycompany.mavenproject3.base.*;
-import com.mycompany.mavenproject3.config.H2Server;
+import com.mycompany.mavenproject3.config.adaptadores.AdaptadorBaseDatos;
 import com.mycompany.mavenproject3.controlador.ControladorEstudiante;
 import com.mycompany.mavenproject3.controlador.ControladorMunicipio;
 import com.mycompany.mavenproject3.controlador.ControladorPersona;
-import com.mycompany.mavenproject3.persistencia.estudiante.PersistenciaEstudianteBD;
-import com.mycompany.mavenproject3.persistencia.persona.PersistenciaPersonaBD;
 
 import java.util.*;
 
@@ -18,7 +16,7 @@ public class AdministradorRegistroEstudiante {
 	private final ControladorMunicipio controladorMunicipio;
 	private final ControladorPersona controladorPersona;
 
-	public AdministradorRegistroEstudiante(H2Server db) {
+	public AdministradorRegistroEstudiante(AdaptadorBaseDatos db) {
 
 		this.controladorEstudiante = new ControladorEstudiante(db);
 		this.controladorMunicipio = new ControladorMunicipio(db);

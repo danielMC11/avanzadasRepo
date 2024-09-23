@@ -45,7 +45,13 @@ public class CSVUtil {
 
 
 	public static int obtenerIndiceCampo(String linea, String campo){
-		return Arrays.asList(linea.split(",")).indexOf(campo);
+		String[] campos = linea.split(",");
+		for (int i = 0; i < campos.length; i++) {
+			if (campos[i].trim().equalsIgnoreCase(campo)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public static List<String> obtenerListaCampos(String linea){
